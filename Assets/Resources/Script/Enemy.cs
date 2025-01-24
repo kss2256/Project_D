@@ -11,6 +11,12 @@ public class Enemy : MonoBehaviour
     private EnemyMove   enemyMove;          //오브젝트 이동 제어
 
 
+    private void Start()
+    {
+        InputManager input = Engine.Input;
+    }
+
+
     public void SetUp(Transform[] waypoints)
     {
 

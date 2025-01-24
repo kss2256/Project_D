@@ -1,0 +1,3 @@
+Spawner 나중에 제작시 SceneManager.m_SizeRatio 
+받아서 객체 만들고 준비
+

@@ -6,25 +6,94 @@ public class CameraResolution : MonoBehaviour
 {
 
 
-    void Awake()
-    {
-        Camera camera = GetComponent<Camera>();
-        Rect rect = camera.rect;
-        float scaleheight = ((float)Screen.width / Screen.height) / ((float)9 / 16); // (가로 / 세로)
-        float scalewidth = 1f / scaleheight;
 
-        if (scaleheight < 1)
+    //세로 기준으로 크기 맞춰보기
+    //void Start()
+    //{
+    //    SpriteRenderer sr = GetComponent<SpriteRenderer>();
+    //    float worldScreenHeight = Camera.main.orthographicSize * 2.0f;
+    //    float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
+
+    //    Vector3 scale = transform.localScale;
+    //    scale.x = worldScreenWidth / sr.sprite.bounds.size.x;
+    //    scale.y = worldScreenHeight / sr.sprite.bounds.size.y;
+    //    transform.localScale = scale;
+    //}
+
+    //가로 기준으로 크기 맞춰보기
+    //void Start()
+    //{
+    //    SpriteRenderer sr = GetComponent<SpriteRenderer>();
+
+    //    // 화면의 가로 크기를 계산 (World 기준)
+    //    float worldScreenWidth = Camera.main.orthographicSize * 2.0f * Screen.width / Screen.height;
+
+    //    // 가로를 기준으로 스프라이트 크기를 맞춤
+    //    Vector3 scale = transform.localScale;
+    //    scale.x = worldScreenWidth / sr.sprite.bounds.size.x;
+    //    scale.y = scale.x; // 비율을 유지하기 위해 가로와 같은 비율로 설정
+    //    transform.localScale = scale;
+    //}
+
+
+    public static Vector3 m_SizeRatio = Vector3.zero;
+    public float m_Speed = 0.0f;
+    public Vector3 m_MovePos = Vector3.zero;
+    public bool m_MoveCamera = false;
+
+    private void Start()
+    {
+        
+    }
+
+   
+    private void Update()
+    {
+        
+        if(Input.GetKeyDown(KeyCode.Q))
         {
-            rect.height = scaleheight;
-            rect.y = (1f - scaleheight) / 2f;
+            CheakRoute(Engine.Scene.ChangeScene(SceneType.STAGE_1));
+        }
+
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+
+            GameObject go = Engine.Scene.NextScene();
+            if(go != null)
+             CheakRoute(go);
+
+        }
+
+
+        if(m_MoveCamera)
+        {
+            MoveCamera();
+        }
+
+
+    }
+
+    void CheakRoute(GameObject go)
+    {        
+        m_MovePos = go.transform.position;
+        m_MovePos.z = -10.0f;
+        m_MoveCamera = true;
+    }
+    void MoveCamera()
+    {
+        
+        Vector3 dir = m_MovePos - transform.position;
+
+        if (dir.magnitude < 0.0001f)
+        {
+            m_MoveCamera = false;
         }
         else
         {
-            rect.width = scalewidth;
-            rect.x = (1f - scalewidth) / 2f;
+            float moveDist = Mathf.Clamp(m_Speed * Time.deltaTime, 0, dir.magnitude);
+            transform.position += dir.normalized * moveDist;
         }
-        camera.rect = rect;
-    }
 
+    }
 
 }
