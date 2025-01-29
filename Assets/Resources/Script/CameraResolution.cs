@@ -36,7 +36,6 @@ public class CameraResolution : MonoBehaviour
     //}
 
 
-    public static Vector3 m_SizeRatio = Vector3.zero;
     public float m_Speed = 0.0f;
     public Vector3 m_MovePos = Vector3.zero;
     public bool m_MoveCamera = false;
@@ -50,19 +49,7 @@ public class CameraResolution : MonoBehaviour
     private void Update()
     {
         
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            CheakRoute(Engine.Scene.ChangeScene(SceneType.STAGE_1));
-        }
 
-        if(Input.GetKeyDown(KeyCode.W))
-        {
-
-            GameObject go = Engine.Scene.NextScene();
-            if(go != null)
-             CheakRoute(go);
-
-        }
 
 
         if(m_MoveCamera)

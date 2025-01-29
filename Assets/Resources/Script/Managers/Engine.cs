@@ -25,27 +25,33 @@ public class Engine : MonoBehaviour
 
     private static void Init()
     {
-        if(null == s_Instance)
+
+        EngineInit();
+
+        
+    }
+    
+
+    private static void EngineInit()
+    {
+        if (null == s_Instance)
         {
             GameObject go = GameObject.Find("@Engine");
-            if(null == go)
+            if (null == go)
             {
                 go = new GameObject("@Engine");
                 go.AddComponent<Engine>();
             }
 
-            if(null == go.GetComponent<Engine>())
+            if (null == go.GetComponent<Engine>())
                 go.AddComponent<Engine>();
 
             DontDestroyOnLoad(go);
             s_Instance = go.GetComponent<Engine>();
 
         }
-
-
-
     }
-    
+
 
 
 
