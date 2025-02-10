@@ -20,10 +20,19 @@ public class ResourceManager
             return null;
         }
 
-        return Object.Instantiate(prefab, _parent);
+        GameObject go = Object.Instantiate(prefab, _parent);
+        int index = go.name.IndexOf("(Clone)");
+        if (index > 0)
+        {
+            go.name = go.name.Substring(0, index);
+        }
+
+
+
+        return go;
     }
 
-    public void Destory(GameObject _go, float _time)
+    public void Destory(GameObject _go, float _time = 0.0f)
     {
         if (null == _go)
             return;

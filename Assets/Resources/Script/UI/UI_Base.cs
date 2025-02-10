@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UI_Base : MonoBehaviour
@@ -13,7 +14,7 @@ public class UI_Base : MonoBehaviour
     protected Button GetButton(int _idx) { return GetUI<Button>(_idx); }
     protected Text GetText(int _idx) { return GetUI<Text>(_idx); }
     protected Image GetImage(int _idx) { return GetUI<Image>(_idx); }
-    protected GameObject GetGameObject(int _idx) { return GetUI<GameObject>(_idx); }
+    protected GameObject GetObject(int _idx) { return GetUI<GameObject>(_idx); }
 
     protected void Bind<T>(Type _type) where T : UnityEngine.Object
     {
@@ -46,5 +47,22 @@ public class UI_Base : MonoBehaviour
 
     }
 
+    public static void Mouse_UIEvent(GameObject go, Action<PointerEventData> action, Define.Mouse_Type type = Define.Mouse_Type.Click)
+    {
 
+        UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
+
+        switch (type)
+        {
+            case Define.Mouse_Type.Click:
+                evt.m_OnPointerClick -= action;
+                evt.m_OnPointerClick += action;
+                break;
+            case Define.Mouse_Type.Drag:
+                evt.m_OnDrag -= action;
+                evt.m_OnDrag += action;
+                break;
+        }     
+
+    }
 }

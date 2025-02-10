@@ -42,14 +42,20 @@ public class CameraResolution : MonoBehaviour
 
     private void Start()
     {
-        
+      
+
+
+
     }
 
    
     private void Update()
     {
-        
-
+        //Test Function
+        if(Input.GetKey(KeyCode.Q))
+        {
+           
+        }
 
 
         if(m_MoveCamera)
@@ -60,7 +66,7 @@ public class CameraResolution : MonoBehaviour
 
     }
 
-    void CheakRoute(GameObject go)
+    void CheckRoute(GameObject go)
     {        
         m_MovePos = go.transform.position;
         m_MovePos.z = -10.0f;

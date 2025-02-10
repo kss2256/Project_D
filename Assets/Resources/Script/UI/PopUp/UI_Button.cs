@@ -1,9 +1,10 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_Button : UI_Base
+public class UI_Button : UI_PopUp
 {
 
     enum Button_UI
@@ -27,8 +28,18 @@ public class UI_Button : UI_Base
     {
         Draw_GameObject,
     }
+
     private void Start()
     {
+        Init();    
+
+
+    }
+
+
+    public override void Init()
+    {
+        base.Init();
 
         //reflection기능 : 컴파일 시에 알 수 없었던 타입이나 멤버들을 찾아내고 사용할 수 있게 해주는 메커니즘
         //Type로 인자받고 사용시에는 typeof로 지정하면 됨
@@ -41,9 +52,15 @@ public class UI_Button : UI_Base
         GetUI<Text>((int)Text_UI.Draw_Text).text = "뽑기 테스트중";
         GetText((int)Text_UI.Draw_Text).text = "대박 뽑기";
 
-    }
 
-   
+        GameObject go = GetImage((int)Image_UI.Draw_Image).gameObject;
+
+        Mouse_UIEvent(go, ((PointerEventData data) => { go.transform.position = data.position; }), Define.Mouse_Type.Drag);
+
+
+
+
+    }
 
 
 }
