@@ -66,6 +66,20 @@ public class Util
     }
 
 
+    public static void MainCameraMove(bool next = false)
+    {
+        if(next)
+        {
+            if(Engine.Scene.NextSceneObject())
+            Camera.main.GetComponent<CameraResolution>().MoveRoute(Engine.Scene.NextSceneObject());
+        }
+        else
+        {
+            if(Engine.Scene.CurSceneObject())
+            Camera.main.GetComponent<CameraResolution>().MoveRoute(Engine.Scene.CurSceneObject());
+
+        }
+    }
 
 
 

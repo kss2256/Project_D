@@ -52,7 +52,7 @@ public class SceneManagerEx
     public GameObject CurSceneObject()
     {
         GameObject go = GameObject.Find(m_CurSceneType.ToString());
-        if (null == go)
+        if (null == go || m_CurSceneType == SceneType.END)
         {
             Debug.Log("SceneType Object Null");
             return null;
@@ -68,6 +68,14 @@ public class SceneManagerEx
     }
 
 
+
+
+    public GameObject NextSceneObject()
+    {
+        NextScene();
+        return CurSceneObject();
+    }
+
     public void NextScene()
     {
         if(m_CurSceneType != SceneType.END)
@@ -80,12 +88,11 @@ public class SceneManagerEx
 
         if(m_CurSceneType == SceneType.STAGE_1)
         {
-            LoadScene("Play Scene");
-            
-        }
-
-      
+            LoadScene("Play Scene");            
+        }      
     }
+
+
 
     public void ChangeScene(SceneType scene)
     {

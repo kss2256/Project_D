@@ -52,9 +52,9 @@ public class CameraResolution : MonoBehaviour
     private void Update()
     {
         //Test Function
-        if(Input.GetKey(KeyCode.Q))
+        if(Input.GetKeyDown(KeyCode.Q))
         {
-           
+            
         }
 
 
@@ -66,7 +66,7 @@ public class CameraResolution : MonoBehaviour
 
     }
 
-    void CheckRoute(GameObject go)
+    public void MoveRoute(GameObject go)
     {        
         m_MovePos = go.transform.position;
         m_MovePos.z = -10.0f;

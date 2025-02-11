@@ -24,19 +24,15 @@ public class UI_Lobby : UI_PopUp
         Init();
     }
 
-    private void Update()
-    {
-
-        
-
-    }
-
+   
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         
         if (Engine.Scene.CurScene == SceneType.STAGE_1)
         {          
             Engine.Scene.ScreenRatio();  // 씬이 완전히 로드된 후 실행
+            Util.MainCameraMove();
+
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
