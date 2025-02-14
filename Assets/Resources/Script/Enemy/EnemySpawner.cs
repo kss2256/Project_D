@@ -18,7 +18,6 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
 
-
         StartCoroutine(SpawnerEnemy());
     }
 
@@ -27,7 +26,10 @@ public class EnemySpawner : MonoBehaviour
     {
         while (true)
         {
-            GameObject clone = Instantiate(enemyPrefab);
+
+            GameObject clone = Engine.Resource.Instantiate("Prefabs\\Enemy\\Enemy_1", this.transform);
+
+            //GameObject clone = Instantiate(enemyPrefab);
             Enemy enemy = clone.GetComponent<Enemy>();
 
             enemy.SetUp(wayPoints);

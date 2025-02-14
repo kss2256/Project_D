@@ -74,7 +74,7 @@ public class Enemy : MonoBehaviour
 
 
             Vector3 dir = (m_WayPoints[m_CurrentIndex].position - transform.position).normalized;
-            m_EnemyMove.MoveTo(dir);
+            m_EnemyMove.MoveDirection(dir);
 
         }
 

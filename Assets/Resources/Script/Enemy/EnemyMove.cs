@@ -22,7 +22,7 @@ public class EnemyMove : MonoBehaviour
     }
 
 
-    public void MoveTo(Vector3 dir)
+    public void MoveDirection(Vector3 dir)
     {
         moveDirection = dir;
     }
